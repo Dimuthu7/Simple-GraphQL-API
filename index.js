@@ -21,6 +21,14 @@ const RootQuery = new GraphQLObjectType({
                 return usersList;
             }
         },
+        // to get user by id
+        user: {
+            type: UserType,
+            args: {id: {type: GraphQLID}},
+            resolve(parent, args) {
+                return usersList.find(user => user.id === args.id);
+            }
+        }
     }
 });
 
