@@ -67,6 +67,18 @@ const mutations = new GraphQLObjectType({
                 return user;
             }
         },
+        // delete a user
+        deleteUser: {
+            type: UserType,
+            args: {
+                id: {type: GraphQLID},
+            },
+            resolve(parent, {id}) {
+                const user = usersList.find(user => user.id === id);
+                usersList = usersList.filter(user => user.id !== id)
+                return user;
+            }
+        }
 });
 
 const schema = new GraphQLSchema({query: RootQuery, mutation: mutations});
